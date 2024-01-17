@@ -15,8 +15,6 @@ class _HomePageState extends State<HomePage> {
 
   final ScrollController controller = ScrollController();
 
-
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -102,24 +100,34 @@ class _HomePageState extends State<HomePage> {
   }
 
   get listOfproduct {
-    return Expanded(
+    controller.addListener(() {
+      print(controller.offset);
+      setState(() {});
+    });
+    return SizedBox(
+      height: 200,
       child: StatefulBuilder(
         builder: (context, setState) => ListView.separated(
+            shrinkWrap: true,
             controller: controller,
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
-              ContainerDataClass data = getProduct[index];
-
-              return FoodContainer(
-                key: UniqueKey(),
-                data: data,
-                controller: controller,
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  AnimatedContainer(
+                    duration: const Duration(milliseconds: 500),
+                    width: 100,
+                    color: Colors.amber,
+                    height: controller.offset == 0.0 ? 150 : 100,
+                  ),
+                ],
               );
             },
             separatorBuilder: (context, index) => const SizedBox(
                   width: 10,
                 ),
-            itemCount: getProduct.length),
+            itemCount: 10),
       ),
     );
   }
@@ -143,10 +151,6 @@ class _FoodContainerState extends State<FoodContainer> {
   late ScrollController controller = widget.controller;
 
   double finalAngle = 0.0;
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -179,21 +183,19 @@ class _FoodContainerState extends State<FoodContainer> {
   }
 
   get headImage {
-    controller.addListener(() {
-      finalAngle = controller.offset;
-      setState(() {});
-    });
-    return StatefulBuilder(builder: (context, setState) {
-      return Transform.rotate(
-        angle: finalAngle,
-        child: CircleAvatar(
-          radius: 100,
-          backgroundImage: AssetImage(
-            data.image,
+    return StatefulBuilder(
+      builder: (context, setState) {
+        return Transform.rotate(
+          angle: finalAngle,
+          child: CircleAvatar(
+            radius: 100,
+            backgroundImage: AssetImage(
+              data.image,
+            ),
           ),
-        ),
-      );
-    });
+        );
+      },
+    );
   }
 
   get header {
