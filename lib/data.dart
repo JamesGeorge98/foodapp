@@ -19,21 +19,21 @@ class LocalData {
       image: "assets/2.jpg",
       price: "\$12",
       subTitle: "Best egs in the matret to nbuyb",
-      title: "Egg",
+      title: "Egg1",
     ),
     ContainerDataClass(
       colors: Colors.green,
       image: "assets/3.jpg",
       price: "\$12",
       subTitle: "Best egs in the matret to nbuyb",
-      title: "Egg",
+      title: "Egg2",
     ),
     ContainerDataClass(
       colors: Colors.green,
       image: "assets/1.jpg",
       price: "\$12",
       subTitle: "Best egs in the matret to nbuyb",
-      title: "Egg",
+      title: "Egg3",
     ),
   ];
 }
